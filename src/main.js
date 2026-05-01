@@ -40,7 +40,7 @@ const pinia = createPinia()
 const app = createApp(App)
   .use(pinia)
   .use(IonicVue)
-  .use(router);
+  .use(router)
 
 router.isReady().then(() => {
   app.mount('#app');

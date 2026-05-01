@@ -1,27 +1,7 @@
 <template>
   <div class="min-h-screen bg-background font-plus-jakarta antialiased selection:bg-primary/10 overflow-x-hidden relative">
     
-    <!-- Floating Header -->
-    <header class="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-12 py-3 sm:py-5">
-       <nav class="max-w-[1400px] mx-auto bg-white/70 backdrop-blur-3xl rounded-2xl sm:rounded-[2rem] border border-white/40 px-5 sm:px-8 py-2.5 sm:py-3 flex items-center justify-between shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)]">
-          <div class="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0" @click="router.push('/')">
-             <div class="w-8 h-8 sm:w-9 sm:h-9 bg-primary rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-                <i class="fas fa-burger text-white text-xs sm:text-sm"></i>
-             </div>
-             <span class="text-base sm:text-lg font-black tracking-tighter text-slate-900 uppercase">FoodLink</span>
-          </div>
-
-          <div class="hidden lg:flex items-center gap-12">
-             <router-link to="/" class="text-[9px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors">About</router-link>
-             <router-link to="/" class="text-[9px] font-black uppercase tracking-widest text-slate-400 hover:text-primary transition-colors">Portals</router-link>
-             <router-link to="/contact" class="text-[9px] font-black uppercase tracking-widest text-primary">Contact Us</router-link>
-          </div>
-
-          <button @click="router.push('/customer/dashboard')" class="bg-slate-900 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em] shadow-xl hover:bg-primary transition-all active:scale-95">
-             Launch App
-          </button>
-       </nav>
-    </header>
+    <Navbar />
 
     <!-- Content -->
     <main class="min-h-screen pt-32 pb-20 px-6 overflow-hidden flex items-center justify-center relative">
@@ -124,6 +104,7 @@
 </template>
 
 <script setup>
+import Navbar from '@/components/common/Navbar.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
