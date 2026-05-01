@@ -1,0 +1,69 @@
+<template>
+  <div class="min-h-screen bg-background font-plus-jakarta antialiased selection:bg-primary/10 overflow-x-hidden flex">
+    <!-- Shared Admin Sidebar -->
+    <AdminSidebar />
+
+    <!-- Main Hub -->
+    <div class="flex-1 flex flex-col min-h-screen relative bg-white">
+      <!-- Identity Bar -->
+      <header class="relative pt-6 pb-6 sm:pt-10 sm:pb-8 px-6 sm:px-12 overflow-hidden bg-white/80 backdrop-blur-xl border-b border-slate-100 sticky top-0 z-[100] w-full">
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] -mr-32 -mt-32 animate-pulse"></div>
+        
+        <div class="relative z-10 flex justify-between items-center max-w-[1400px] mx-auto w-full">
+          <div>
+            <p class="text-[9px] sm:text-[11px] font-black uppercase tracking-[0.3em] text-primary mb-1.5">Merchant Pipeline</p>
+            <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tighter leading-none">Onboarding Queue</h1>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Container -->
+      <main class="relative z-20 flex-1 w-full pb-32 px-6 sm:px-12 max-w-[1400px] mx-auto mt-12 sm:mt-16">
+        
+        <!-- Pending Entities Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+           <div v-for="merchant in pendingMerchants" :key="merchant.id" 
+             class="group bg-white p-8 rounded-[2.5rem] shadow-[0_15px_40px_-20px_rgba(0,0,0,0.06)] hover:shadow-[0_45px_100px_-30px_rgba(255,77,0,0.12)] border border-slate-100 transition-all duration-700 relative overflow-hidden">
+             
+             <div class="relative z-10 space-y-6">
+                <div class="flex justify-between items-start">
+                   <div class="w-16 h-16 rounded-[2rem] bg-slate-100 overflow-hidden shadow-lg border-2 border-white group-hover:scale-110 transition-transform">
+                      <img :src="merchant.logo" class="w-full h-full object-cover" />
+                   </div>
+                   <div class="px-4 py-1.5 bg-amber-50 rounded-xl text-[9px] font-black text-amber-600 uppercase tracking-widest border border-amber-100/50">
+                      Pending Signal
+                   </div>
+                </div>
+
+                <div>
+                   <h4 class="text-xl font-black text-slate-900 tracking-tight">{{ merchant.name }}</h4>
+                   <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{{ merchant.owner }} • {{ merchant.date }}</p>
+                </div>
+
+                <div class="pt-6 border-t border-slate-50 flex gap-4">
+                   <button class="flex-1 h-12 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest text-[9px] shadow-xl hover:bg-emerald-500 transition-all active:scale-95">
+                      Authorize
+                   </button>
+                   <button class="w-12 h-12 bg-slate-50 text-slate-400 rounded-xl flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">
+                      <i class="fas fa-trash-can text-sm"></i>
+                   </button>
+                </div>
+             </div>
+           </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import AdminSidebar from '@/components/admin/AdminSidebar.vue';
+
+const pendingMerchants = ref([
+  { id: 1, name: 'Taco Universe', owner: 'Carlos Santana', date: '22 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Taco+Universe&background=ff4d00&color=fff' },
+  { id: 2, name: 'Sushi Signal', owner: 'Yuki Tanaka', date: '21 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Sushi+Signal&background=22d3ee&color=fff' },
+  { id: 3, name: 'Pasta Protocol', owner: 'Giuseppe Rossi', date: '20 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Pasta+Protocol&background=10b981&color=fff' },
+]);
+</script>
