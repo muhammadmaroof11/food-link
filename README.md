@@ -16,9 +16,27 @@ FoodLink operates as a multi-portal ecosystem, providing dedicated experiences f
 
 - **Frontend**: Vue.js 3 (Composition API), Vite, TailwindCSS (Customized Design System)
 - **Backend & Database**: Supabase (PostgreSQL, Realtime, Storage, Authentication)
+- **Mobile Packaging**: Capacitor (Android/iOS)
 - **Routing**: Vue Router
 - **State Management**: Pinia
-- **Maps**: Leaflet.js
+- **Maps & Native**: Leaflet.js, Capacitor Background Geolocation, Local Notifications
+
+## Multi-App Architecture & Native Capabilities
+
+FoodLink uses a single Vue 3 codebase to dynamically generate four distinct Android applications (`Diner`, `Rider`, `Merchant`, `Admin`) using Capacitor.
+
+- **Dynamic Theming**: Authentication screens automatically re-brand and style themselves based on the targeted app (e.g., Emerald for Riders, Amber for Merchants).
+- **Background Tracking (Rider App)**: Uses native Android Foreground Services (`@capacitor-community/background-geolocation`) to continuously broadcast rider coordinates to Supabase during active missions, even when the phone screen is off.
+- **Instant Notifications**: Leverages Supabase Realtime combined with `@capacitor/local-notifications` to instantly alert riders of new dispatch signals natively.
+
+## Build Pipeline
+
+To build a specific application, use the respective Vite target command and sync with Capacitor:
+```bash
+npm run build:rider
+npx cap sync android --project apps/rider
+```
+*(Available scripts: `build:rider`, `build:merchant`, `build:diner`, `build:admin`)*
 
 ## Project Documentation
 
