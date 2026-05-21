@@ -4,7 +4,7 @@
     <!-- Left Column: Visual & Branding (Desktop Only) -->
     <div class="hidden lg:flex flex-1 bg-slate-950 relative overflow-hidden flex-col justify-center p-20">
        <div class="absolute inset-0 z-0">
-          <img src="@/assets/branding/landing_hero.png" class="w-full h-full object-cover opacity-40 mix-blend-luminosity" />
+          <img :src="bgImage" class="w-full h-full object-cover opacity-40 mix-blend-luminosity" />
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
        </div>
        
@@ -13,9 +13,9 @@
              <img src="@/assets/branding/logo.png" class="w-full h-full object-contain" />
           </div>
           <div class="space-y-4">
-             <h1 class="text-6xl font-black text-white tracking-tighter leading-none uppercase">Gourmet <br/> Portal.</h1>
+             <h1 class="text-6xl font-black text-white tracking-tighter leading-none uppercase" v-html="theme.headline.replace(' ', '<br/>')"></h1>
              <p class="text-slate-400 text-lg font-bold max-w-md leading-relaxed">
-                Log in to access your premium food delivery service.
+                {{ theme.subtitle }}
              </p>
           </div>
        </div>
@@ -58,7 +58,7 @@
 
            <p v-if="error" class="text-red-500 text-[10px] font-black uppercase tracking-widest text-center">{{ error }}</p>
 
-           <button type="submit" :disabled="loading" class="w-full h-16 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-2xl hover:bg-primary transition-all active:scale-[0.98] flex items-center justify-center gap-4 group disabled:opacity-70">
+           <button type="submit" :disabled="loading" :class="[theme.buttonClass, 'w-full h-16 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-2xl transition-all active:scale-[0.98] flex items-center justify-center gap-4 group disabled:opacity-70']">
               <span v-if="!loading">Login to Account</span>
               <i v-else class="fas fa-spinner fa-spin"></i>
               <i v-if="!loading" class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
@@ -79,8 +79,49 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 
+import bgRider from '@/assets/branding/auth_bg_rider.png';
+import bgMerchant from '@/assets/branding/auth_bg_merchant.png';
+import bgDiner from '@/assets/branding/auth_bg_diner.png';
+import bgAdmin from '@/assets/branding/auth_bg_admin.png';
+import bgDefault from '@/assets/branding/landing_hero.png';
+
 const router = useRouter();
 const authStore = useAuthStore();
+
+const target = import.meta.env.VITE_APP_TARGET || 'web';
+
+const bgImage = target === 'rider' ? bgRider :
+                target === 'merchant' ? bgMerchant :
+                target === 'admin' ? bgAdmin :
+                target === 'diner' ? bgDiner : bgDefault;
+
+const theme = {
+  rider: {
+    headline: 'Rider Fleet.',
+    subtitle: 'Deliver happiness on your own schedule.',
+    buttonClass: 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/30'
+  },
+  merchant: {
+    headline: 'Merchant Hub.',
+    subtitle: 'Grow your business and manage orders seamlessly.',
+    buttonClass: 'bg-amber-500 hover:bg-amber-600 shadow-amber-500/30'
+  },
+  admin: {
+    headline: 'Command Center.',
+    subtitle: 'Manage operations and oversee the network.',
+    buttonClass: 'bg-slate-800 hover:bg-slate-900 shadow-slate-800/30'
+  },
+  diner: {
+    headline: 'Gourmet Portal.',
+    subtitle: 'Discover and order the best food in town.',
+    buttonClass: 'bg-primary hover:bg-primary/90 shadow-primary/30'
+  },
+  web: {
+    headline: 'Gourmet Portal.',
+    subtitle: 'Log in to access your premium food delivery service.',
+    buttonClass: 'bg-slate-900 hover:bg-primary'
+  }
+}[target];
 
 const email = ref('');
 const password = ref('');

@@ -3,7 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('../views/LandingPage.vue')
+    component: () => {
+      const target = import.meta.env.VITE_APP_TARGET;
+      if (target === 'diner') return import('../views/customer/Dashboard.vue');
+      if (target === 'merchant') return import('../views/restaurant/Dashboard.vue');
+      if (target === 'admin') return import('../views/admin/Dashboard.vue');
+      if (target === 'rider') return import('../views/rider/Dashboard.vue');
+      return import('../views/LandingPage.vue');
+    }
   },
   {
     path: '/contact',

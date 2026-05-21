@@ -114,6 +114,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { riderService } from '@/services/rider';
 import { supabase } from '@/utils/supabase';
+import { registerPlugin } from '@capacitor/core';
+const BackgroundGeolocation = registerPlugin('BackgroundGeolocation');
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -178,12 +180,46 @@ const initMap = () => {
   }, 300);
 };
 
-onMounted(() => {
+let watcherId = null;
+
+onMounted(async () => {
   fetchData();
+
+  try {
+    watcherId = await BackgroundGeolocation.addWatcher(
+      {
+        backgroundMessage: "Broadcasting your coordinates to the network.",
+        backgroundTitle: "FoodLink Active Mission",
+        requestPermissions: true,
+        stale: false,
+        distanceFilter: 10 // Only trigger when moved 10 meters
+      },
+      function callback(location, error) {
+        if (error) {
+          if (error.code === "NOT_AUTHORIZED") {
+            console.log("Location not authorized");
+          }
+          return console.error(error);
+        }
+        
+        // This is where we broadcast the new location to Supabase
+        if (location) {
+          console.log('Background Location Updated:', location);
+          // In a real scenario: supabase.from('riders').update({lat, lng}).eq(...)
+        }
+      }
+    );
+  } catch (err) {
+    console.log("Background Geolocation not available on Web", err);
+  }
 });
 
 onUnmounted(() => {
   if (map.value) map.value.remove();
+  
+  if (watcherId) {
+    BackgroundGeolocation.removeWatcher({ id: watcherId });
+  }
 });
 
 const handleComplete = async () => {

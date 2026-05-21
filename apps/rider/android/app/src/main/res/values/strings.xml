@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FoodLink Rider</string>
+    <string name="title_activity_main">FoodLink Rider</string>
+    <string name="package_name">com.foodlink.rider</string>
+    <string name="custom_url_scheme">com.foodlink.rider</string>
+</resources>

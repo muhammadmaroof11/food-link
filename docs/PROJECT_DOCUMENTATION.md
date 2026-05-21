@@ -40,6 +40,24 @@ The core PostgreSQL schema revolves around:
 3. Run the development server: `npm run dev`
 4. To build for production: `npm run build`
 
+## Mobile & Desktop Apps (Capacitor)
+
+FoodLink uses a single Vue 3 codebase to generate four distinct Android applications using Capacitor. The build process uses Vite environment variables (`VITE_APP_TARGET`) to compile app-specific bundles.
+
+### Build Pipeline
+Run the specific npm script to build the web assets, and then sync them into the Capacitor Android workspace:
+- **Diner App**: `npm run build:diner` -> `npx cap sync android --project apps/diner`
+- **Rider App**: `npm run build:rider` -> `npx cap sync android --project apps/rider`
+- **Merchant App**: `npm run build:merchant` -> `npx cap sync android --project apps/merchant`
+- **Admin App**: `npm run build:admin` -> `npx cap sync android --project apps/admin`
+
+Each app lives in the `apps/` directory and contains its own native Android project (`android/`) where splash screens, icons, and package names (e.g., `com.foodlink.rider`) are configured.
+
+### Background Services
+The **Rider App** integrates specific native capabilities:
+- **Background Geolocation**: Uses `@capacitor-community/background-geolocation` and Android Foreground Services to stream live coordinates to Supabase even when the screen is locked during a mission.
+- **Local Notifications**: Uses `@capacitor/local-notifications` paired with Supabase Realtime to alert riders of new dispatch signals immediately while the app or its background service is running.
+
 ## Commercial Status
 
 This project is proprietary and built for commercial sale. Unauthorized distribution or use is prohibited.

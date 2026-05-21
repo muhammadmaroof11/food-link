@@ -109,6 +109,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { riderService } from '@/services/rider';
 import { supabase } from '@/utils/supabase';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import RiderBottomNav from '@/components/rider/RiderBottomNav.vue';
 
 const router = useRouter();
@@ -138,19 +139,33 @@ const fetchData = async () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
   fetchData();
+  
+  try {
+    await LocalNotifications.requestPermissions();
+  } catch(e) {
+    console.log("LocalNotifications permission issue on Web", e);
+  }
 
   // Listen for new dispatches
   const subscription = supabase
     .channel('available-missions')
     .on('postgres_changes', { 
-      event: '*', 
+      event: 'INSERT', 
       schema: 'public', 
       table: 'orders',
       filter: 'rider_id=is.null'
-    }, () => {
+    }, (payload) => {
       fetchData();
+      LocalNotifications.schedule({
+        notifications: [{
+          title: "New Dispatch Signal!",
+          body: `Order #${payload.new.id.slice(0, 8)} needs a pilot.`,
+          id: new Date().getTime(),
+          schedule: { at: new Date(Date.now() + 1000) }
+        }]
+      }).catch(e => console.log('LocalNotifications schedule err', e));
     })
     .subscribe();
 });

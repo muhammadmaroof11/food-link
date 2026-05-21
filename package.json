@@ -6,13 +6,21 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
+    "build:diner": "set VITE_APP_TARGET=diner&& vue-tsc && vite build",
+    "build:merchant": "set VITE_APP_TARGET=merchant&& vue-tsc && vite build",
+    "build:admin": "set VITE_APP_TARGET=admin&& vue-tsc && vite build",
+    "build:rider": "set VITE_APP_TARGET=rider&& vue-tsc && vite build",
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@capacitor-community/background-geolocation": "^1.2.26",
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
     "@capacitor/core": "8.3.1",
+    "@capacitor/local-notifications": "^8.2.0",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
