@@ -31,6 +31,12 @@ export const menuService = {
   /**
    * Add a new menu item (Merchant only)
    */
+  async addItem(itemData) {
+    const { data, error } = await supabase
+      .from('menu_items')
+      .insert([itemData])
+      .select();
+    
     if (error) throw error;
     return data;
   },

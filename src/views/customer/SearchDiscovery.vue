@@ -122,6 +122,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import DesktopNav from '@/components/customer/DesktopNav.vue';
 import CustomerBottomNav from '@/components/customer/CustomerBottomNav.vue';
+import { getRestaurantPlaceholder } from '@/utils/placeholders';
 
 const router = useRouter();
 const searchQuery = ref('');
@@ -147,7 +148,7 @@ const searchResults = ref([
     id: 1,
     name: 'Burger Joint Central',
     cuisine: 'American • Burgers',
-    image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=800',
+    image: getRestaurantPlaceholder('Burger Joint Central'),
     rating: 4.8,
     deliveryTime: '15-25 min',
     distance: '1.2 mi',
@@ -159,7 +160,7 @@ const searchResults = ref([
     id: 2,
     name: 'Green Bowl Cafe',
     cuisine: 'Healthy • Vegan',
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    image: getRestaurantPlaceholder('Green Bowl Cafe'),
     rating: 4.6,
     deliveryTime: '20-35 min',
     distance: '2.5 mi',
@@ -171,7 +172,7 @@ const searchResults = ref([
     id: 3,
     name: "Luigi's Oven",
     cuisine: 'Italian • Pizza',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=800',
+    image: getRestaurantPlaceholder('Luigi\'s Oven'),
     rating: 4.9,
     deliveryTime: '30-45 min',
     distance: '3.8 mi',

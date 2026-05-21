@@ -32,10 +32,19 @@ export const orderService = {
     return order;
   },
 
+  /**
+   * Get orders for a customer
+   */
+  async getCustomerOrders(customerId) {
+    const { data, error } = await supabase
+      .from('orders')
+      .select('*, restaurants(name), order_items(*, menu_items(name))')
+      .eq('customer_id', customerId)
+      .order('created_at', { ascending: false });
+    
     if (error) throw error;
     return data;
   },
-
   /**
    * Get orders for a specific restaurant
    */

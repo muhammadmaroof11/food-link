@@ -60,10 +60,11 @@
 <script setup>
 import { ref } from 'vue';
 import AdminSidebar from '@/components/admin/AdminSidebar.vue';
+import { getRestaurantPlaceholder } from '@/utils/placeholders';
 
 const pendingMerchants = ref([
-  { id: 1, name: 'Taco Universe', owner: 'Carlos Santana', date: '22 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Taco+Universe&background=ff4d00&color=fff' },
-  { id: 2, name: 'Sushi Signal', owner: 'Yuki Tanaka', date: '21 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Sushi+Signal&background=22d3ee&color=fff' },
-  { id: 3, name: 'Pasta Protocol', owner: 'Giuseppe Rossi', date: '20 Oct, 2023', logo: 'https://ui-avatars.com/api/?name=Pasta+Protocol&background=10b981&color=fff' },
+  { id: 1, name: 'Taco Universe', owner: 'Carlos Santana', date: '22 Oct, 2023', logo: getRestaurantPlaceholder('Taco Universe') },
+  { id: 2, name: 'Sushi Signal', owner: 'Yuki Tanaka', date: '21 Oct, 2023', logo: getRestaurantPlaceholder('Sushi Signal') },
+  { id: 3, name: 'Pasta Protocol', owner: 'Giuseppe Rossi', date: '20 Oct, 2023', logo: getRestaurantPlaceholder('Pasta Protocol') },
 ]);
 </script>

@@ -145,11 +145,12 @@ CREATE POLICY "Riders can view assigned orders" ON orders FOR SELECT USING (auth
 -- ==========================================
 
 -- Insert a sample restaurant (Owner-less for now, until you create a merchant user)
+-- Note: image_url is set to NULL to allow the frontend to use dynamic proprietary placeholders.
 INSERT INTO public.restaurants (name, cuisine, description, rating, is_open, image_url)
 VALUES 
-('Artisan Burger Co.', 'Gourmet Burgers', 'The finest beef in the district.', 4.9, true, 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=800'),
-('Bella Cucina', 'Italian', 'Authentic wood-fired pizza and handmade pasta.', 4.8, true, 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=800'),
-('Sushi Signal', 'Japanese', 'High-fidelity sushi and sashimi.', 4.7, true, 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&q=80&w=800');
+('Artisan Burger Co.', 'Gourmet Burgers', 'The finest beef in the district.', 4.9, true, NULL),
+('Bella Cucina', 'Italian', 'Authentic wood-fired pizza and handmade pasta.', 4.8, true, NULL),
+('Sushi Signal', 'Japanese', 'High-fidelity sushi and sashimi.', 4.7, true, NULL);
 
 -- Insert sample menu items for the first restaurant
 -- Note: We use a subquery to get the ID of the first restaurant
@@ -159,10 +160,11 @@ DECLARE
 BEGIN
     SELECT id INTO rest_id FROM restaurants WHERE name = 'Artisan Burger Co.' LIMIT 1;
     
+    -- Note: image_url is set to NULL to allow the frontend to use dynamic proprietary placeholders.
     INSERT INTO public.menu_items (restaurant_id, name, description, price, category, image_url)
     VALUES 
-    (rest_id, 'Signature Smash', 'Double Wagyu beef, truffle mayo, aged cheddar.', 24.50, 'Burgers', 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80&w=400'),
-    (rest_id, 'Truffle Fries', 'Hand-cut fries with parmesan and white truffle oil.', 12.00, 'Sides', 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&q=80&w=400');
+    (rest_id, 'Signature Smash', 'Double Wagyu beef, truffle mayo, aged cheddar.', 24.50, 'Burgers', NULL),
+    (rest_id, 'Truffle Fries', 'Hand-cut fries with parmesan and white truffle oil.', 12.00, 'Sides', NULL);
 END $$;
 
 -- SECTION 5: TRANSACTIONS (Financial Ledger)

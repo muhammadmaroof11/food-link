@@ -69,7 +69,7 @@
           <div class="mt-12 pt-10 border-t border-slate-50 flex items-center justify-between">
             <div class="flex items-center gap-6">
               <div class="w-14 h-14 rounded-2xl bg-slate-100 overflow-hidden shadow-lg border-2 border-white">
-                <img src="https://ui-avatars.com/api/?name=Ahmed+Ali&background=ff4d00&color=fff" alt="Rider" class="w-full h-full object-cover" />
+                <img :src="getPersonPlaceholder('Ahmed Ali')" alt="Rider" class="w-full h-full object-cover" />
               </div>
               <div>
                 <p class="text-lg font-black text-slate-900 leading-none">Ahmed Ali</p>
@@ -106,8 +106,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { getPersonPlaceholder } from '@/utils/placeholders';
 import DesktopNav from '@/components/customer/DesktopNav.vue';
 import CustomerBottomNav from '@/components/customer/CustomerBottomNav.vue';
 import { supabase } from '@/utils/supabase';

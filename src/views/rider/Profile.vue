@@ -114,15 +114,19 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { IonPage } from '@ionic/vue';
 import RiderMobileHeader from '@/components/rider/RiderMobileHeader.vue';
 import RiderBottomNav from '@/components/rider/RiderBottomNav.vue';
+import { getPersonPlaceholder } from '@/utils/placeholders';
+
+const router = useRouter();
 
 // --- Mock Profile Data ---
 
 const profile = ref({
   name: 'Alex Mercer',
-  avatar: 'https://ui-avatars.com/api/?name=Alex+Mercer&background=random',
+  avatar: getPersonPlaceholder('Alex Mercer'),
   rating: 4.9,
   tier: 'Elite',
   joinDate: 'Jan 2023',

@@ -91,16 +91,17 @@
 <script setup>
 import { ref } from 'vue';
 import AdminSidebar from '@/components/admin/AdminSidebar.vue';
+import { getPersonPlaceholder } from '@/utils/placeholders';
 
 const mockUsers = ref([
-  { id: 1, name: 'John Doe', email: 'john@foodlink.io', role: 'Customer', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=11' },
-  { id: 2, name: 'Alice Smith', email: 'alice@merchant.com', role: 'Merchant', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=5' },
-  { id: 3, name: 'Mike Johnson', email: 'mike.j@rider.app', role: 'Rider', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=12' },
-  { id: 4, name: 'Sarah Williams', email: 'sarah.w@foodlink.io', role: 'Customer', status: 'Suspended', avatar: 'https://i.pravatar.cc/150?img=9' },
-  { id: 5, name: 'David Lee', email: 'david@cuisine.com', role: 'Merchant', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=14' },
-  { id: 6, name: 'Emma Wilson', email: 'emma@foodlink.io', role: 'Customer', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=1' },
-  { id: 7, name: 'James Bond', icon: 'fa-user', email: 'james@rider.app', role: 'Rider', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=13' },
-  { id: 8, name: 'Linda Chen', email: 'linda@sushi.com', role: 'Merchant', status: 'Active', avatar: 'https://i.pravatar.cc/150?img=2' }
+  { id: 1, name: 'John Doe', email: 'john@foodlink.io', role: 'Customer', status: 'Active', avatar: getPersonPlaceholder('John Doe') },
+  { id: 2, name: 'Alice Smith', email: 'alice@merchant.com', role: 'Merchant', status: 'Active', avatar: getPersonPlaceholder('Alice Smith') },
+  { id: 3, name: 'Mike Johnson', email: 'mike.j@rider.app', role: 'Rider', status: 'Active', avatar: getPersonPlaceholder('Mike Johnson') },
+  { id: 4, name: 'Sarah Williams', email: 'sarah.w@foodlink.io', role: 'Customer', status: 'Suspended', avatar: getPersonPlaceholder('Sarah Williams') },
+  { id: 5, name: 'David Lee', email: 'david@cuisine.com', role: 'Merchant', status: 'Active', avatar: getPersonPlaceholder('David Lee') },
+  { id: 6, name: 'Emma Wilson', email: 'emma@foodlink.io', role: 'Customer', status: 'Active', avatar: getPersonPlaceholder('Emma Wilson') },
+  { id: 7, name: 'James Bond', icon: 'fa-user', email: 'james@rider.app', role: 'Rider', status: 'Active', avatar: getPersonPlaceholder('James Bond') },
+  { id: 8, name: 'Linda Chen', email: 'linda@sushi.com', role: 'Merchant', status: 'Active', avatar: getPersonPlaceholder('Linda Chen') }
 ]);
 
 const roleClass = (role) => {

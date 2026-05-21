@@ -61,7 +61,7 @@
             
             <div class="relative">
                 <div class="w-28 h-28 sm:w-40 sm:h-40 rounded-[2.8rem] bg-slate-100 overflow-hidden ring-4 ring-white shadow-2xl relative z-10 transition-transform group-hover:scale-105">
-                  <img :src="vendor.image_url || 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=300'" alt="Restaurant" class="w-full h-full object-cover" />
+                  <img :src="vendor.image_url || getRestaurantPlaceholder(vendor.name)" alt="Restaurant" class="w-full h-full object-cover" />
                 </div>
                 <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-emerald-500 rounded-2xl border-4 border-white flex items-center justify-center text-white shadow-xl animate-pulse z-20">
                   <i class="fas fa-check"></i>
@@ -160,9 +160,11 @@
   </div>
 </template>
 
+<script setup>
 import { ref, onMounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { restaurantService } from '@/services/restaurant';
+import { getRestaurantPlaceholder } from '@/utils/placeholders';
 import RestaurantSidebar from '@/components/restaurant/RestaurantSidebar.vue';
 import RestaurantBottomNav from '@/components/restaurant/RestaurantBottomNav.vue';
 

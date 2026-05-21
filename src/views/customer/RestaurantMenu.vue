@@ -166,12 +166,14 @@
   </div>
 </template>
 
+<script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import DesktopNav from '@/components/customer/DesktopNav.vue';
 import CustomerBottomNav from '@/components/customer/CustomerBottomNav.vue';
 import { restaurantService } from '@/services/restaurant';
 import { useCartStore } from '@/stores/cart';
+import { getDishPlaceholder, getRestaurantPlaceholder } from '@/utils/placeholders';
 
 const router = useRouter();
 const route = useRoute();
@@ -196,7 +198,7 @@ const fetchMenu = async () => {
     restaurant.value = {
       id: data.id,
       name: data.name,
-      heroImage: data.image_url || 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1200',
+      heroImage: data.image_url || getRestaurantPlaceholder(data.name),
       tags: [data.cuisine || 'Gourmet', 'Premium', '₢₢₢'],
       rating: data.rating || 5.0,
       reviews: 500,
@@ -205,7 +207,7 @@ const fetchMenu = async () => {
     
     menuItems.value = data.menu_items.map(item => ({
       ...item,
-      image: item.image_url || 'https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&q=80&w=400'
+      image: item.image_url || getDishPlaceholder(item.name)
     }));
   } catch (err) {
     console.error('Failed to fetch menu:', err);

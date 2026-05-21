@@ -50,7 +50,7 @@
                   :class="['group bg-white rounded-[2.5rem] shadow-[0_15px_40px_-20px_rgba(0,0,0,0.06)] hover:shadow-[0_45px_100px_-30px_rgba(255,77,0,0.12)] border border-slate-100 transition-all duration-700 p-4', !dish.is_available && 'opacity-60 saturate-50']">
                   
                   <div class="h-44 relative overflow-hidden rounded-[2rem] mb-6">
-                    <img :src="dish.image_url || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=400'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
+                    <img :src="dish.image_url || getDishPlaceholder(dish.name)" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" />
                     <div v-if="!dish.is_available" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center">
                       <span class="text-[10px] font-black text-white uppercase tracking-[0.2em] animate-pulse">Out of Service</span>
                     </div>
@@ -178,6 +178,7 @@ import { menuService } from '@/services/menu';
 import { restaurantService } from '@/services/restaurant';
 import { optimizeImage } from '@/utils/imageOptimizer';
 import { supabase } from '@/utils/supabase';
+import { getDishPlaceholder } from '@/utils/placeholders';
 import RestaurantSidebar from '@/components/restaurant/RestaurantSidebar.vue';
 import RestaurantBottomNav from '@/components/restaurant/RestaurantBottomNav.vue';
 

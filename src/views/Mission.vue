@@ -51,7 +51,7 @@
                 </div>
              </div>
              <div class="relative">
-                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800" class="rounded-[3rem] shadow-2xl" />
+                <img :src="getCategoryPlaceholder('Mission')" class="rounded-[3rem] shadow-2xl" />
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10"></div>
              </div>
           </div>
@@ -97,6 +97,7 @@
 </template>
 
 <script setup>
+import { getCategoryPlaceholder } from '@/utils/placeholders';
 import Navbar from '@/components/common/Navbar.vue';
 
 const standards = [

@@ -60,7 +60,7 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
              <div class="relative order-2 lg:order-1">
                 <div class="aspect-square rounded-[2.5rem] sm:rounded-[4rem] bg-slate-100 overflow-hidden shadow-2xl relative z-10 group border-8 border-white">
-                   <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
+                   <img :src="getCategoryPlaceholder('Logistics')" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000" />
                 </div>
                 <div class="absolute -left-12 -bottom-12 w-48 h-48 bg-primary/5 rounded-full blur-[80px] -z-0"></div>
              </div>
@@ -166,6 +166,7 @@
 </template>
 
 <script setup>
+import { getCategoryPlaceholder } from '@/utils/placeholders';
 import Navbar from '@/components/common/Navbar.vue';
 import { useRouter } from 'vue-router';
 

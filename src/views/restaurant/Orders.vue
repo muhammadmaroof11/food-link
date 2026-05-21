@@ -136,6 +136,7 @@
   </div>
 </template>
 
+<script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { orderService } from '@/services/order';

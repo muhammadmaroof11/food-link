@@ -138,6 +138,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { getDishPlaceholder } from '@/utils/placeholders';
 import RestaurantSidebar from '@/components/restaurant/RestaurantSidebar.vue';
 import RestaurantBottomNav from '@/components/restaurant/RestaurantBottomNav.vue';
 
@@ -171,9 +172,9 @@ const chartBars = ref([
 ]);
 
 const topDishes = ref([
-  { name: 'Classic Double Burger Labs', unitsSold: 342, revenue: '4,104', trend: 14, image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=100' },
-  { name: 'Pepperoni Artisan Pizza', unitsSold: 289, revenue: '5,202', trend: 8, image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=100' },
-  { name: 'Avocado Quinoa Signal Bowl', unitsSold: 156, revenue: '2,184', trend: -2, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=100' },
+  { name: 'Classic Double Burger Labs', unitsSold: 342, revenue: '4,104', trend: 14, image: getDishPlaceholder('Classic Double Burger Labs') },
+  { name: 'Pepperoni Artisan Pizza', unitsSold: 289, revenue: '5,202', trend: 8, image: getDishPlaceholder('Pepperoni Artisan Pizza') },
+  { name: 'Avocado Quinoa Signal Bowl', unitsSold: 156, revenue: '2,184', trend: -2, image: getDishPlaceholder('Avocado Quinoa Signal Bowl') },
 ]);
 </script>
 

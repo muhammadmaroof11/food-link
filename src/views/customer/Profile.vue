@@ -31,7 +31,7 @@
              
              <div class="relative group/avatar">
                  <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-[2.2rem] bg-slate-100 overflow-hidden ring-4 ring-white shadow-2xl relative z-10 transition-all group-hover/avatar:scale-95">
-                   <img :src="user?.avatar_url || `https://ui-avatars.com/api/?name=${user?.full_name || 'User'}&background=ff4d00&color=fff&size=200`" alt="User" class="w-full h-full object-cover" />
+                   <img :src="user?.avatar_url || getPersonPlaceholder(user?.full_name || 'User')" alt="User" class="w-full h-full object-cover" />
                    <div v-if="uploading" class="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center text-white">
                       <i class="fas fa-spinner fa-spin"></i>
                    </div>
@@ -152,6 +152,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
+import { getPersonPlaceholder } from '@/utils/placeholders';
 import { optimizeImage } from '@/utils/imageOptimizer';
 import { supabase } from '@/utils/supabase';
 import DesktopNav from '@/components/customer/DesktopNav.vue';

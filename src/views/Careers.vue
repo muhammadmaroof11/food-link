@@ -48,7 +48,7 @@
                 </div>
              </div>
              <div class="relative">
-                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" class="rounded-[3rem] shadow-2xl" />
+                <img :src="getCategoryPlaceholder('Careers')" class="rounded-[3rem] shadow-2xl" />
                 <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10"></div>
              </div>
           </div>
@@ -96,6 +96,8 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+import { getCategoryPlaceholder } from '@/utils/placeholders';
 import Navbar from '@/components/common/Navbar.vue';
 
 const benefits = [

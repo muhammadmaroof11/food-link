@@ -149,7 +149,7 @@
             <div class="relative bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-[0_15px_40px_-20px_rgba(0,0,0,0.06)] hover:shadow-[0_45px_100px_-30px_rgba(255,77,0,0.15)] hover:-translate-y-3 transition-all duration-700 cursor-pointer h-full flex flex-col p-4">
               <!-- Image Area -->
               <div class="h-44 sm:h-56 relative overflow-hidden rounded-[2rem]">
-                <img :alt="restaurant.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" :src="restaurant.image_url || 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=800'"/>
+                <img :alt="restaurant.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" :src="restaurant.image_url || getRestaurantPlaceholder(restaurant.name)"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 
                 <div class="absolute top-4 right-4 flex gap-2">
@@ -207,6 +207,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import { restaurantService } from '@/services/restaurant';
 import { cacheService } from '@/utils/cache';
+import { getCategoryPlaceholder, getRestaurantPlaceholder } from '@/utils/placeholders';
 import DesktopNav from '@/components/customer/DesktopNav.vue';
 import CustomerBottomNav from '@/components/customer/CustomerBottomNav.vue';
 
@@ -218,12 +219,12 @@ const loading = ref(true);
 const user = computed(() => authStore.profile);
 
 const categories = [
-  { name: 'Burgers', image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Pizza', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Sushi', image: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Desserts', image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Coffee', image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=200' },
-  { name: 'Healthy', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=200' },
+  { name: 'Burgers', image: getCategoryPlaceholder('Burgers') },
+  { name: 'Pizza', image: getCategoryPlaceholder('Pizza') },
+  { name: 'Sushi', image: getCategoryPlaceholder('Sushi') },
+  { name: 'Desserts', image: getCategoryPlaceholder('Desserts') },
+  { name: 'Coffee', image: getCategoryPlaceholder('Coffee') },
+  { name: 'Healthy', image: getCategoryPlaceholder('Healthy') },
 ];
 
 const fetchData = async () => {
